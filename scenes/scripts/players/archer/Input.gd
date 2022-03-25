@@ -6,25 +6,24 @@ var rightButton = 15
 var jumpButton1 = 0
 var jumpButton2 = 2
 
+var inputs
+
 func run(playerIndex):
 	
-	var inputBundle = {
+	inputs = {
 		'leftPressed' : false,
 		'rightPressed' : false,
 		'jumpPressed' : false
 	}
 	
 	if leftIsPressed(playerIndex):
-		inputBundle['leftPressed'] = true
+		inputs['leftPressed'] = true
 	elif rightIsPressed(playerIndex):
-		inputBundle['rightPressed'] = true
+		inputs['rightPressed'] = true
 	
 	if jumpIsPressed(playerIndex):
-		inputBundle['jumpPressed'] = true
+		inputs['jumpPressed'] = true
 		
-	return inputBundle
-
-
 func leftIsPressed(playerIndex):
 	if Input.is_action_pressed("left") and not Input.is_action_pressed("right"):
 		return true
