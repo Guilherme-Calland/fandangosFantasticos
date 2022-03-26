@@ -14,6 +14,7 @@ var isOnFloor
 var face
 var body
 var bag
+var sword
 
 func run(gameBundle):
 	if gameBundle['inputs'] == null:
@@ -54,13 +55,16 @@ func unpackBundle(gameBundle):
 	face = animation['face']
 	body = animation['body']
 	bag = animation['bag']
+	sword = animation['sword']
 
 func flipSpriteHorizontal(b):
 	face.flip_h = b
 	body.flip_h = b
 	bag.flip_h = b
+	sword.flip_h = b
 
 func playAnimation(animation):
 	face.play(animation)
 	body.play(animation)
 	bag.play(animation)
+	sword.play(animation)

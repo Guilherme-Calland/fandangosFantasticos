@@ -17,6 +17,10 @@ body = ExtResource( 7 )
 
 [node name="Sprites" type="Node2D" parent="."]
 
+[node name="Sword" type="AnimatedSprite" parent="Sprites"]
+frames = ExtResource( 8 )
+animation = "jump"
+
 [node name="Body" type="AnimatedSprite" parent="Sprites"]
 frames = ExtResource( 7 )
 animation = "idle"
