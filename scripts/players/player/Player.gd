@@ -4,12 +4,17 @@ export var playerIndex = 0
 export var speed = 75
 export var jumpForce = 150
 
+export var body = preload("res://resources/spriteFrame/body/Body1.tres")
+export var face = preload("res://resources/spriteFrame/face/Face1.tres")
+
 var gameBundle
 
 var gravity
 
 func _ready():
 	initBundle()
+	$Sprites/Body.set_sprite_frames(body)
+	$Sprites/Face.set_sprite_frames(face)
 
 func run(inGravity):
 	gravity = inGravity
