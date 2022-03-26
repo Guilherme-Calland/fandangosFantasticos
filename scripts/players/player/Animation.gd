@@ -17,12 +17,18 @@ var body
 var bag
 var sword
 
+#localFlags
+var wasOnFloor = true
+
 func run(gameBundle):
 	if gameBundle['inputs'] == null:
 		return
 	unpackBundle(gameBundle)
 		
 	if isOnFloor:
+		if not wasOnFloor:
+			playAnimation("jump")
+		wasOnFloor = true
 		if leftPressed:
 			setFrameSpeed(abs(motion.x/maxSpeed))
 			flipSpriteHorizontal(true)
@@ -36,6 +42,7 @@ func run(gameBundle):
 			setFrameSpeed(1)
 			
 	elif not isOnFloor:
+		wasOnFloor = false
 		playAnimation("fall")
 	
 func unpackBundle(gameBundle):
