@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
 export var playerIndex = 0
-export var speed = 75
+export var aceleration = 2.5
+export var maxSpeed = 100
 export var jumpForce = 150
 
 export var body = preload("res://resources/spriteFrame/body/Body1.tres")
@@ -12,13 +13,15 @@ export var sword = preload("res://resources/spriteFrame/Empty.tres")
 var gameBundle
 
 var gravity
+var friction
 
 func _ready():
 	initBundle()
 	setSprites()
 
-func run(inGravity):
+func run(inGravity, inFriction):
 	gravity = inGravity
+	friction = inFriction
 	$Input.run(playerIndex)
 	$Animation.run(gameBundle)
 	$Physics.run(gameBundle)
@@ -27,13 +30,20 @@ func run(inGravity):
 
 func updateBundle():
 	gameBundle['inputs'] = $Input.inputs
-	gameBundle['physics'] = {'motion': $Physics.motion, 'speed': speed, 'jumpForce': jumpForce, 'gravity': gravity}
+	gameBundle['physics'] = {
+		'motion': $Physics.motion,
+		'aceleration': aceleration, 
+		'maxSpeed': maxSpeed, 
+		'jumpForce': jumpForce, 
+		'gravity': gravity,
+		'friction': friction 
+		}
 	gameBundle['flags'] = {'isOnFloor': is_on_floor()}
 	
 func initBundle():
 	gameBundle = {
 		'inputs' : $Input.inputs,
-		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0},
+		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0, 'friction': 0},
 		'flags' : {'isOnFloor': false},
 		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag, 'sword': $Sprites/Sword}
 	}

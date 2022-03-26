@@ -7,9 +7,11 @@ var jumpPressed
 
 #physics
 var motion = Vector2(0,0)
-var speed
-var gravity
+var aceleration
+var maxSpeed
 var jumpForce
+var gravity
+var friction
 
 #flags
 var isOnFloor
@@ -19,15 +21,16 @@ func run(gameBundle):
 		return
 	unpackBundle(gameBundle)
 	
-	if leftPressed:
-		motion.x = -speed
-	elif rightPressed:
-		motion.x = speed
-	else:
-		motion.x = 0
-	
 	if isOnFloor:
 		motion.y = gravity
+		
+		if leftPressed:
+			motion.x = clamp(motion.x - aceleration, -maxSpeed, 0)
+		elif rightPressed:
+			motion.x = clamp(motion.x + aceleration, 0, maxSpeed)
+		else:
+			motion.x = lerp(motion.x, 0, friction)
+			
 		if jumpPressed:
 			motion.y  = -jumpForce
 	elif not isOnFloor:
@@ -46,9 +49,11 @@ func unpackBundle(gameBundle):
 	
 	#physics
 	motion = physics['motion']
-	speed = physics['speed']
-	gravity = physics['gravity']
+	aceleration = physics['aceleration']
+	maxSpeed = physics['maxSpeed']
 	jumpForce = physics['jumpForce']
+	gravity = physics['gravity']
+	friction = physics['friction']
 	
 	#flags
 	isOnFloor = flags['isOnFloor']

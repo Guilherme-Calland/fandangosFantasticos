@@ -6,6 +6,7 @@ var rightPressed
 
 #physics
 var motion
+var maxSpeed
 
 #flags
 var isOnFloor
@@ -20,20 +21,22 @@ func run(gameBundle):
 	if gameBundle['inputs'] == null:
 		return
 	unpackBundle(gameBundle)
-	
-	if leftPressed:
-		flipSpriteHorizontal(true)
-		
-	elif rightPressed:
-		flipSpriteHorizontal(false)
 		
 	if isOnFloor:
-		if motion.x != 0:
+		if leftPressed:
+			setFrameSpeed(abs(motion.x/maxSpeed))
+			flipSpriteHorizontal(true)
 			playAnimation("run")
-		elif motion.x == 0:
+		elif rightPressed:
+			setFrameSpeed(abs(motion.x/maxSpeed))
+			flipSpriteHorizontal(false)
+			playAnimation("run")
+		else:
 			playAnimation("idle")
+			setFrameSpeed(1)
+			
 	elif not isOnFloor:
-		playAnimation("jump")
+		playAnimation("fall")
 	
 func unpackBundle(gameBundle):
 	var inputs = gameBundle['inputs']
@@ -47,6 +50,7 @@ func unpackBundle(gameBundle):
 	
 	#physics
 	motion = physics['motion']
+	maxSpeed = physics['maxSpeed']
 	
 	#flags
 	isOnFloor = flags['isOnFloor']
@@ -68,3 +72,9 @@ func playAnimation(animation):
 	body.play(animation)
 	bag.play(animation)
 	sword.play(animation)
+
+func setFrameSpeed(m):
+	face.set_speed_scale(m)
+	body.set_speed_scale(m)
+	bag.set_speed_scale(m)
+	sword.set_speed_scale(m)
