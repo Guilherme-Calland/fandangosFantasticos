@@ -29,5 +29,5 @@ func initBundle():
 		'inputs' : $Input.inputs,
 		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0},
 		'flags' : {'isOnFloor': false},
-		'sprite' : $AnimatedSprite
+		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body}
 	}

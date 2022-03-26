@@ -1,21 +1,27 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://resources/spriteFrame/Archer.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://resources/spriteFrame/Body1.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/scripts/players/archer/Physics.gd" type="Script" id=2]
 [ext_resource path="res://scenes/scripts/players/archer/Animation.gd" type="Script" id=3]
+[ext_resource path="res://resources/spriteFrame/Face1.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://scenes/scripts/players/archer/Archer.gd" type="Script" id=5]
 [ext_resource path="res://scenes/scripts/players/archer/Input.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5.3135, 9 )
 
-[node name="Archer" type="KinematicBody2D"]
+[node name="Player1" type="KinematicBody2D"]
 script = ExtResource( 5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Body" type="AnimatedSprite" parent="Sprites"]
 frames = ExtResource( 1 )
-animation = "idle"
-playing = true
+animation = "jump"
+
+[node name="Face" type="AnimatedSprite" parent="Sprites"]
+frames = ExtResource( 4 )
+animation = "jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
