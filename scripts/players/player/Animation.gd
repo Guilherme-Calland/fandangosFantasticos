@@ -13,6 +13,7 @@ var isOnFloor
 #animation
 var face
 var body
+var bag
 
 func run(gameBundle):
 	if gameBundle['inputs'] == null:
@@ -20,22 +21,18 @@ func run(gameBundle):
 	unpackBundle(gameBundle)
 	
 	if leftPressed:
-		face.flip_h = true
-		body.flip_h = true
+		flipSpriteHorizontal(true)
+		
 	elif rightPressed:
-		face.flip_h = false
-		body.flip_h = false
+		flipSpriteHorizontal(false)
 		
 	if isOnFloor:
 		if motion.x != 0:
-			face.play("run")
-			body.play("run")
+			playAnimation("run")
 		elif motion.x == 0:
-			face.play("idle")
-			body.play("idle")
+			playAnimation("idle")
 	elif not isOnFloor:
-		face.play('jump')
-		body.play('jump')
+		playAnimation("jump")
 	
 func unpackBundle(gameBundle):
 	var inputs = gameBundle['inputs']
@@ -56,3 +53,14 @@ func unpackBundle(gameBundle):
 	#animation
 	face = animation['face']
 	body = animation['body']
+	bag = animation['bag']
+
+func flipSpriteHorizontal(b):
+	face.flip_h = b
+	body.flip_h = b
+	bag.flip_h = b
+
+func playAnimation(animation):
+	face.play(animation)
+	body.play(animation)
+	bag.play(animation)

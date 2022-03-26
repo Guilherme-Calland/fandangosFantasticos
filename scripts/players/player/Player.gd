@@ -6,6 +6,7 @@ export var jumpForce = 150
 
 export var body = preload("res://resources/spriteFrame/body/Body1.tres")
 export var face = preload("res://resources/spriteFrame/face/Face1.tres")
+export var bag = preload("res://resources/spriteFrame/Empty.tres")
 
 var gameBundle
 
@@ -13,8 +14,7 @@ var gravity
 
 func _ready():
 	initBundle()
-	$Sprites/Body.set_sprite_frames(body)
-	$Sprites/Face.set_sprite_frames(face)
+	setSprites()
 
 func run(inGravity):
 	gravity = inGravity
@@ -34,5 +34,10 @@ func initBundle():
 		'inputs' : $Input.inputs,
 		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0},
 		'flags' : {'isOnFloor': false},
-		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body}
+		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag}
 	}
+
+func setSprites():
+	$Sprites/Body.set_sprite_frames(body)
+	$Sprites/Face.set_sprite_frames(face)
+	$Sprites/Bag.set_sprite_frames(bag)

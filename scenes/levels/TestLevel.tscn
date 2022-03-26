@@ -1,10 +1,11 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://graphics/terrain/sprite_sheet.png" type="Texture" id=1]
 [ext_resource path="res://scenes/players/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/spriteFrame/body/Body1.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://scripts/levels/testLevel/TestLevel.gd" type="Script" id=4]
 [ext_resource path="res://resources/spriteFrame/face/Face2.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://resources/spriteFrame/bag/Bag1.tres" type="SpriteFrames" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 18, 0, 18, 18, 0, 18 )
@@ -508,8 +509,9 @@ zoom = Vector2( 0.5, 0.5 )
 
 [node name="Player1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 100, -9 )
+body = ExtResource( 3 )
+bag = ExtResource( 6 )
 
 [node name="Player2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 125, -9 )
-body = ExtResource( 3 )
 face = ExtResource( 5 )
