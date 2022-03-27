@@ -14,14 +14,14 @@ var gameBundle
 
 var gravity
 var friction
+var airResistance
 
 func _ready():
 	initBundle()
 	setAllSprites()
 
-func run(inGravity, inFriction):
-	gravity = inGravity
-	friction = inFriction
+func run(worldBundle):
+	unpackWorldBundle(worldBundle)
 	$Input.run(playerIndex)
 	$Animation.run(gameBundle)
 	$Physics.run(gameBundle)
@@ -36,18 +36,24 @@ func updateBundle():
 		'maxSpeed': maxSpeed, 
 		'jumpForce': jumpForce, 
 		'gravity': gravity,
-		'friction': friction 
+		'friction': friction,
+		'airResistance' : airResistance
 		}
 	gameBundle['flags'] = {'isOnFloor': is_on_floor()}
 	
 func initBundle():
 	gameBundle = {
 		'inputs' : $Input.inputs,
-		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0, 'friction': 0},
+		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0, 'friction': 0, 'airResistance': 0},
 		'flags' : {'isOnFloor': false},
 		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag, 'sword': $Sprites/Sword}
 	}
-	
+
+func unpackWorldBundle(worldBundle):
+	gravity = worldBundle['gravity']
+	friction = worldBundle['friction']
+	airResistance = worldBundle['airResistance']
+
 func setAllSprites():
 	$Sprites/Face.set_sprite_frames(face)
 	$Sprites/Body.set_sprite_frames(body)
