@@ -88,6 +88,18 @@ func run(gameBundle):
 			motion.x = 1
 		elif motion.x < 0:
 			motion.x = -1
+		
+		if jumpPressed:
+			var p = 0.65
+			var a = p*p + 1
+			var axisForce = jumpForce*sqrt(a)/ a
+			
+			if motion.x > 0:
+				motion.x -= p*axisForce
+				motion.y = -axisForce
+			elif motion.x < 0:
+				motion.x += p*axisForce
+				motion.y = -axisForce
 
 func unpackBundle(gameBundle):
 	var inputs = gameBundle['inputs']

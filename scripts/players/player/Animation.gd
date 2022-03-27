@@ -3,6 +3,7 @@ extends Node
 #inputs
 var leftPressed
 var rightPressed
+var jumpPressed
 var secondaryActionPressed
 
 #physics
@@ -42,6 +43,8 @@ func run(gameBundle):
 	
 	if isOnWall:
 		playAnimation("touch")
+		if jumpPressed:
+			flipSpriteHorizontal(!body.flip_h)
 	
 func unpackBundle(gameBundle):
 	var inputs = gameBundle['inputs']
@@ -52,6 +55,7 @@ func unpackBundle(gameBundle):
 	#inputs
 	leftPressed = inputs['leftPressed']
 	rightPressed = inputs['rightPressed']
+	jumpPressed = inputs['jumpPressed']
 	secondaryActionPressed = inputs['secondaryActionPressed']
 	
 	#physics
