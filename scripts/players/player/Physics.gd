@@ -23,10 +23,15 @@ var airResistance
 var isOnFloor
 var impulseLock
 
+#localFlags
+var jumpLock = false
+
 func run(gameBundle):
 	if gameBundle['inputs'] == null:
 		return
 	unpackBundle(gameBundle)
+	
+	$Timer.wait_time = jumpForce/200
 	
 	if isOnFloor:
 		
@@ -42,7 +47,9 @@ func run(gameBundle):
 		else:
 			motion.x = lerp(motion.x, 0, friction)
 			
-		if jumpPressed and not impulseLock:
+		if jumpPressed and not impulseLock and not jumpLock:
+			jumpLock = true
+			$Timer.start()
 			if secondaryActionPressed:
 				emit_signal("impulseLock", true)
 				if leftPressed:
@@ -87,3 +94,7 @@ func unpackBundle(gameBundle):
 	#flags
 	isOnFloor = flags['isOnFloor']
 	impulseLock = flags['impulseLock']
+
+
+func _on_Timer_timeout():
+	jumpLock = false
