@@ -11,6 +11,7 @@ var maxSpeed
 
 #flags
 var isOnFloor
+var impulseLock
 
 #animation
 var face
@@ -24,11 +25,11 @@ func run(gameBundle):
 	unpackBundle(gameBundle)
 		
 	if isOnFloor:
-		if leftPressed and not secondaryActionPressed:
+		if leftPressed and not secondaryActionPressed and not impulseLock:
 			setFrameSpeed(abs(motion.x/maxSpeed))
 			flipSpriteHorizontal(true)
 			playAnimation("run")
-		elif rightPressed and not secondaryActionPressed:
+		elif rightPressed and not secondaryActionPressed and not impulseLock:
 			setFrameSpeed(abs(motion.x/maxSpeed))
 			flipSpriteHorizontal(false)
 			playAnimation("run")
@@ -56,6 +57,7 @@ func unpackBundle(gameBundle):
 	
 	#flags
 	isOnFloor = flags['isOnFloor']
+	impulseLock = flags['impulseLock']
 
 	#animation
 	face = animation['face']

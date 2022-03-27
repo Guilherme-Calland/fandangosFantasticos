@@ -1,5 +1,8 @@
 extends Node
 
+#signals
+signal impulseLock
+
 #inputs
 var leftPressed
 var rightPressed
@@ -18,6 +21,7 @@ var airResistance
 
 #flags
 var isOnFloor
+var impulseLock
 
 func run(gameBundle):
 	if gameBundle['inputs'] == null:
@@ -25,17 +29,22 @@ func run(gameBundle):
 	unpackBundle(gameBundle)
 	
 	if isOnFloor:
+		
+		if abs(motion.x) < 1:
+			emit_signal("impulseLock", false)
+		
 		motion.y = gravity
 		
-		if leftPressed and not secondaryActionPressed:
+		if leftPressed and not secondaryActionPressed and not impulseLock:
 			motion.x = clamp(motion.x - aceleration, -maxSpeed, 0)
-		elif rightPressed and not secondaryActionPressed:
+		elif rightPressed and not secondaryActionPressed and not impulseLock:
 			motion.x = clamp(motion.x + aceleration, 0, maxSpeed)
 		else:
 			motion.x = lerp(motion.x, 0, friction)
 			
-		if jumpPressed:
+		if jumpPressed and not impulseLock:
 			if secondaryActionPressed:
+				emit_signal("impulseLock", true)
 				if leftPressed:
 					motion.y = -jumpForce/4
 					motion.x -= horizontalImpulseForce
@@ -44,6 +53,11 @@ func run(gameBundle):
 					motion.x += horizontalImpulseForce
 			if not secondaryActionPressed:
 				motion.y  = -jumpForce
+				if leftPressed:
+					motion.x -= horizontalImpulseForce/16
+				elif rightPressed:
+					motion.x += horizontalImpulseForce/16
+					
 	elif not isOnFloor:
 		motion.x = lerp(motion.x, 0, airResistance)
 		motion.y += gravity
@@ -72,3 +86,4 @@ func unpackBundle(gameBundle):
 	
 	#flags
 	isOnFloor = flags['isOnFloor']
+	impulseLock = flags['impulseLock']

@@ -4,7 +4,7 @@ extends Node
 const leftButton = 14
 const rightButton = 15
 const jumpButton1 = 0
-const jumpButton2 = 2
+const jumpButton2 = 3
 const secondaryAction1 = 4
 const secondaryAction2 = 6
 
