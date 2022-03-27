@@ -14,10 +14,10 @@ var motion = Vector2(0,0)
 var aceleration
 var maxSpeed
 var jumpForce
-var horizontalImpulseForce
 var gravity
 var friction
 var airResistance
+var XYProportion
 
 #flags
 var isOnFloor
@@ -40,9 +40,9 @@ func run(gameBundle):
 		
 		motion.y = gravity
 		
-		if leftPressed and not secondaryActionPressed and not impulseLock:
+		if leftPressed and not secondaryActionPressed and not impulseLock and not jumpLock:
 			motion.x = clamp(motion.x - aceleration, -maxSpeed, 0)
-		elif rightPressed and not secondaryActionPressed and not impulseLock:
+		elif rightPressed and not secondaryActionPressed and not impulseLock and not jumpLock:
 			motion.x = clamp(motion.x + aceleration, 0, maxSpeed)
 		else:
 			motion.x = lerp(motion.x, 0, friction)
@@ -50,20 +50,29 @@ func run(gameBundle):
 		if jumpPressed and not impulseLock and not jumpLock:
 			jumpLock = true
 			$Timer.start()
+			
+			var p = XYProportion
+			var a = p*p + 1
+			var axisForce = jumpForce*sqrt(a)/ a
 			if secondaryActionPressed:
 				emit_signal("impulseLock", true)
 				if leftPressed:
-					motion.y = -jumpForce/4
-					motion.x -= horizontalImpulseForce
-				if rightPressed:
-					motion.y = -jumpForce/4
-					motion.x += horizontalImpulseForce
-			if not secondaryActionPressed:
-				motion.y  = -jumpForce
-				if leftPressed:
-					motion.x -= horizontalImpulseForce/16
+					motion.x -= p*axisForce
+					motion.y = -axisForce
 				elif rightPressed:
-					motion.x += horizontalImpulseForce/16
+					motion.x += p*axisForce
+					motion.y = -axisForce
+				else:
+					motion.y = -jumpForce
+			if not secondaryActionPressed:
+				if leftPressed:
+					motion.x -= axisForce
+					motion.y  = -p*axisForce
+				elif rightPressed:
+					motion.x += axisForce
+					motion.y  = -p*axisForce
+				else:
+					motion.y = -jumpForce
 					
 	elif not isOnFloor:
 		motion.x = lerp(motion.x, 0, airResistance)
@@ -86,10 +95,10 @@ func unpackBundle(gameBundle):
 	aceleration = physics['aceleration']
 	maxSpeed = physics['maxSpeed']
 	jumpForce = physics['jumpForce']
-	horizontalImpulseForce = physics['horizontalImpulseForce']
 	gravity = physics['gravity']
 	friction = physics['friction']
 	airResistance = physics['airResistance']
+	XYProportion = physics['XYProportion']
 	
 	#flags
 	isOnFloor = flags['isOnFloor']

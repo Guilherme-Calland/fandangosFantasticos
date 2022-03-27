@@ -4,7 +4,7 @@ export var playerIndex = 0
 export var aceleration = 2.5
 export var maxSpeed = 100
 export var jumpForce = 150
-export var horizontalImpulseForce = 75
+export var XYProportion = 3
 
 export var face = preload("res://resources/spriteFrame/face/Face1.tres") setget setFace
 export var body = preload("res://resources/spriteFrame/body/Body1.tres") setget setBody
@@ -37,17 +37,17 @@ func updateBundle():
 		'aceleration': aceleration, 
 		'maxSpeed': maxSpeed, 
 		'jumpForce': jumpForce, 
-		'horizontalImpulseForce': horizontalImpulseForce,
 		'gravity': gravity,
 		'friction': friction,
-		'airResistance' : airResistance
+		'airResistance' : airResistance,
+		'XYProportion' : XYProportion
 		}
 	gameBundle['flags']['isOnFloor'] = is_on_floor()
 	
 func initBundle():
 	gameBundle = {
 		'inputs' : $Input.inputs,
-		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'horizontalImpulseForce': horizontalImpulseForce, 'gravity': 0, 'friction': 0, 'airResistance': 0},
+		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0, 'friction': 0, 'airResistance': 0, 'XYProportion': XYProportion},
 		'flags' : {'isOnFloor': false, 'impulseLock': false},
 		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag, 'sword': $Sprites/Sword}
 	}
