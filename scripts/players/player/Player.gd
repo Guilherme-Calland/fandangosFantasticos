@@ -5,10 +5,10 @@ export var aceleration = 2.5
 export var maxSpeed = 100
 export var jumpForce = 150
 
-export var body = preload("res://resources/spriteFrame/body/Body1.tres")
-export var face = preload("res://resources/spriteFrame/face/Face1.tres")
-export var bag = preload("res://resources/spriteFrame/Empty.tres")
-export var sword = preload("res://resources/spriteFrame/Empty.tres")
+export var face = preload("res://resources/spriteFrame/face/Face1.tres") setget setFace
+export var body = preload("res://resources/spriteFrame/body/Body1.tres") setget setBody
+export var bag = preload("res://resources/spriteFrame/Empty.tres") setget setBag
+export var sword = preload("res://resources/spriteFrame/Empty.tres") setget setSword
 
 var gameBundle
 
@@ -17,7 +17,7 @@ var friction
 
 func _ready():
 	initBundle()
-	setSprites()
+	setAllSprites()
 
 func run(inGravity, inFriction):
 	gravity = inGravity
@@ -47,9 +47,25 @@ func initBundle():
 		'flags' : {'isOnFloor': false},
 		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag, 'sword': $Sprites/Sword}
 	}
-
-func setSprites():
-	$Sprites/Body.set_sprite_frames(body)
+	
+func setAllSprites():
 	$Sprites/Face.set_sprite_frames(face)
+	$Sprites/Body.set_sprite_frames(body)
 	$Sprites/Bag.set_sprite_frames(bag)
 	$Sprites/Sword.set_sprite_frames(sword)
+
+func setFace(newFace):
+	face = newFace
+	setAllSprites()
+	
+func setBody(newBody):
+	body = newBody
+	setAllSprites()
+
+func setBag(newBag):
+	bag = newBag
+	setAllSprites()
+
+func setSword(newSword):
+	sword = newSword
+	setAllSprites()

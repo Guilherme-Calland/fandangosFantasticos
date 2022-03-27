@@ -43,7 +43,7 @@ func run(gameBundle):
 			
 	elif not isOnFloor:
 		wasOnFloor = false
-		playAnimation("fall")
+		playAnimation("jump")
 	
 func unpackBundle(gameBundle):
 	var inputs = gameBundle['inputs']

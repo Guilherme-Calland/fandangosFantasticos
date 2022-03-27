@@ -14,6 +14,11 @@ extents = Vector2( 5.3135, 8.5 )
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 5 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 0.5 )
+shape = SubResource( 2 )
+
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Sword" type="AnimatedSprite" parent="Sprites"]
@@ -33,11 +38,6 @@ animation = "jump"
 frames = ExtResource( 9 )
 animation = "run"
 frame = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 0.5 )
-shape = SubResource( 2 )
 
 [node name="Input" type="Node" parent="."]
 script = ExtResource( 6 )
