@@ -3,6 +3,7 @@ extends Node
 #inputs
 var leftPressed
 var rightPressed
+var secondaryActionPressed
 
 #physics
 var motion
@@ -17,23 +18,17 @@ var body
 var bag
 var sword
 
-#localFlags
-var wasOnFloor = true
-
 func run(gameBundle):
 	if gameBundle['inputs'] == null:
 		return
 	unpackBundle(gameBundle)
 		
 	if isOnFloor:
-		if not wasOnFloor:
-			playAnimation("jump")
-		wasOnFloor = true
-		if leftPressed:
+		if leftPressed and not secondaryActionPressed:
 			setFrameSpeed(abs(motion.x/maxSpeed))
 			flipSpriteHorizontal(true)
 			playAnimation("run")
-		elif rightPressed:
+		elif rightPressed and not secondaryActionPressed:
 			setFrameSpeed(abs(motion.x/maxSpeed))
 			flipSpriteHorizontal(false)
 			playAnimation("run")
@@ -42,7 +37,6 @@ func run(gameBundle):
 			setFrameSpeed(1)
 			
 	elif not isOnFloor:
-		wasOnFloor = false
 		playAnimation("jump")
 	
 func unpackBundle(gameBundle):
@@ -54,6 +48,7 @@ func unpackBundle(gameBundle):
 	#inputs
 	leftPressed = inputs['leftPressed']
 	rightPressed = inputs['rightPressed']
+	secondaryActionPressed = inputs['secondaryActionPressed']
 	
 	#physics
 	motion = physics['motion']

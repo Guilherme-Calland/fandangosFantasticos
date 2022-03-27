@@ -1,10 +1,12 @@
 extends Node
 
 
-var leftButton = 14
-var rightButton = 15
-var jumpButton1 = 0
-var jumpButton2 = 2
+const leftButton = 14
+const rightButton = 15
+const jumpButton1 = 0
+const jumpButton2 = 2
+const secondaryAction1 = 4
+const secondaryAction2 = 6
 
 var inputs
 
@@ -13,7 +15,8 @@ func run(playerIndex):
 	inputs = {
 		'leftPressed' : false,
 		'rightPressed' : false,
-		'jumpPressed' : false
+		'jumpPressed' : false,
+		'secondaryActionPressed' : false
 	}
 	
 	if leftIsPressed(playerIndex):
@@ -23,6 +26,9 @@ func run(playerIndex):
 	
 	if jumpIsPressed(playerIndex):
 		inputs['jumpPressed'] = true
+	
+	if secondaryActionIsPressed(playerIndex):
+		inputs['secondaryActionPressed'] = true
 		
 func leftIsPressed(playerIndex):
 	if Input.is_action_pressed("left") and not Input.is_action_pressed("right"):
@@ -43,3 +49,12 @@ func jumpIsPressed(playerIndex):
 		return true
 	if Input.is_joy_button_pressed(playerIndex, jumpButton2):
 		return true
+
+func secondaryActionIsPressed(playerIndex):
+	if Input.is_action_pressed("secondaryAction"):
+		return true
+	if Input.is_joy_button_pressed(playerIndex, secondaryAction1):
+		return true
+	if Input.is_joy_button_pressed(playerIndex, secondaryAction2):
+		return true
+	
