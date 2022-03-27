@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 export var playerIndex = 0
 export var aceleration = 2.5
-export var maxSpeed = 100
-export var jumpForce = 150
-export var XYProportion = 3
+export var maxSpeed = 100.0
+export var jumpForce = 150.0
+export var XYProportion = 3.0
 
 export var face = preload("res://resources/spriteFrame/face/Face1.tres") setget setFace
 export var body = preload("res://resources/spriteFrame/body/Body1.tres") setget setBody
@@ -29,6 +29,14 @@ func run(worldBundle):
 	$Physics.run(gameBundle)
 	move_and_slide($Physics.motion, Vector2(0,-1))
 	updateBundle()
+	
+func initBundle():
+	gameBundle = {
+		'inputs' : $Input.inputs,
+		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0, 'friction': 0, 'airResistance': 0, 'XYProportion': XYProportion},
+		'flags' : {'isOnFloor': false, 'isOnWall': false, 'impulseLock': false},
+		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag, 'sword': $Sprites/Sword}
+	}
 
 func updateBundle():
 	gameBundle['inputs'] = $Input.inputs
@@ -43,15 +51,8 @@ func updateBundle():
 		'XYProportion' : XYProportion
 		}
 	gameBundle['flags']['isOnFloor'] = is_on_floor()
+	gameBundle['flags']['isOnWall'] = is_on_wall()
 	
-func initBundle():
-	gameBundle = {
-		'inputs' : $Input.inputs,
-		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0, 'friction': 0, 'airResistance': 0, 'XYProportion': XYProportion},
-		'flags' : {'isOnFloor': false, 'impulseLock': false},
-		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag, 'sword': $Sprites/Sword}
-	}
-
 func unpackWorldBundle(worldBundle):
 	gravity = worldBundle['gravity']
 	friction = worldBundle['friction']

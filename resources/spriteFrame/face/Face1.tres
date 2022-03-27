@@ -5,7 +5,7 @@
 [ext_resource path="res://graphics/players/faces/face1/idle/idle1.png" type="Texture" id=3]
 [ext_resource path="res://graphics/players/faces/face1/idle/idle2.png" type="Texture" id=4]
 [ext_resource path="res://graphics/players/faces/face1/jumping/jumping1.png" type="Texture" id=5]
-[ext_resource path="res://graphics/players/faces/face1/falling/falling.png" type="Texture" id=6]
+[ext_resource path="res://graphics/players/faces/face1/touching/touching1.png" type="Texture" id=6]
 
 [resource]
 animations = [ {
@@ -14,11 +14,6 @@ animations = [ {
 "name": "idle",
 "speed": 2.5
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "jump",
@@ -26,6 +21,11 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "fall",
+"name": "touch",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "run",
 "speed": 5.0
 } ]

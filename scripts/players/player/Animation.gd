@@ -11,6 +11,7 @@ var maxSpeed
 
 #flags
 var isOnFloor
+var isOnWall
 var impulseLock
 
 #animation
@@ -36,9 +37,11 @@ func run(gameBundle):
 		else:
 			playAnimation("idle")
 			setFrameSpeed(1)
-			
 	elif not isOnFloor:
 		playAnimation("jump")
+	
+	if isOnWall:
+		playAnimation("touch")
 	
 func unpackBundle(gameBundle):
 	var inputs = gameBundle['inputs']
@@ -57,6 +60,7 @@ func unpackBundle(gameBundle):
 	
 	#flags
 	isOnFloor = flags['isOnFloor']
+	isOnWall = flags['isOnWall']
 	impulseLock = flags['impulseLock']
 
 	#animation
