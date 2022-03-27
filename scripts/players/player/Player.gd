@@ -34,7 +34,7 @@ func initBundle():
 	gameBundle = {
 		'inputs' : $Input.inputs,
 		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0, 'friction': 0, 'airResistance': 0, 'XYProportion': XYProportion},
-		'flags' : {'isOnFloor': false, 'isOnWall': false, 'impulseLock': false},
+		'flags' : {'isOnFloor': false, 'isOnWall': false, 'isOnCeiling': false, 'impulseLock': false},
 		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag, 'sword': $Sprites/Sword}
 	}
 
@@ -52,6 +52,7 @@ func updateBundle():
 		}
 	gameBundle['flags']['isOnFloor'] = is_on_floor()
 	gameBundle['flags']['isOnWall'] = is_on_wall()
+	gameBundle['flags']['isOnCeiling'] = is_on_ceiling()
 	
 func unpackWorldBundle(worldBundle):
 	gravity = worldBundle['gravity']

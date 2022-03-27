@@ -26,7 +26,7 @@ func run(gameBundle):
 		return
 	unpackBundle(gameBundle)
 		
-	if isOnFloor:
+	if isOnFloor and not isOnWall:
 		if leftPressed and not secondaryActionPressed and not impulseLock:
 			setFrameSpeed(abs(motion.x/maxSpeed))
 			flipSpriteHorizontal(true)

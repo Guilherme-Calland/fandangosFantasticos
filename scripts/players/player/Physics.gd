@@ -22,6 +22,7 @@ var XYProportion
 #flags
 var isOnFloor
 var isOnWall
+var isOnCeiling
 var impulseLock
 
 #localFlags
@@ -100,7 +101,10 @@ func run(gameBundle):
 			elif motion.x < 0:
 				motion.x += p*axisForce
 				motion.y = -axisForce
-
+	
+	if isOnCeiling:
+		motion.y = 1
+	
 func unpackBundle(gameBundle):
 	var inputs = gameBundle['inputs']
 	var physics = gameBundle['physics']
@@ -125,9 +129,8 @@ func unpackBundle(gameBundle):
 	#flags
 	isOnFloor = flags['isOnFloor']
 	isOnWall = flags['isOnWall']
+	isOnCeiling = flags['isOnCeiling']
 	impulseLock = flags['impulseLock']
-
 
 func _on_Timer_timeout():
 	jumpLock = false
-	pass
