@@ -512,7 +512,7 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Player1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 49, 546 )
+position = Vector2( 248, 606 )
 maxSpeed = 75.0
 jumpForce = 175.0
 XYProportion = 4.0

@@ -5,7 +5,7 @@ func _ready():
 
 func run():
 	if $RayCast2D.is_colliding() || $RayCast2D2.is_colliding() || $RayCast2D3.is_colliding():
-		if not $AnimationPlayer.current_animation == "ready":
+		if not $AnimationPlayer.current_animation == "areaAttack":
 			$AnimationPlayer.play("gettingReady")
 	elif not $RayCast2D.is_colliding():
 		if not $AnimationPlayer.current_animation == "idle":
@@ -16,3 +16,6 @@ func playReady():
 
 func playIdle():
 	$AnimationPlayer.play("idle")
+
+func playAreaAttack():
+	$AnimationPlayer.play("areaAttack")
