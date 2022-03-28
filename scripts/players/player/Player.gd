@@ -6,10 +6,10 @@ export var maxSpeed = 100.0
 export var jumpForce = 150.0
 export var XYProportion = 3.0
 
-export var face = preload("res://resources/spriteFrame/face/Face1.tres") setget setFace
-export var body = preload("res://resources/spriteFrame/body/Body1.tres") setget setBody
-export var bag = preload("res://resources/spriteFrame/Empty.tres") setget setBag
-export var sword = preload("res://resources/spriteFrame/Empty.tres") setget setSword
+export var face = preload("res://resources/spriteFrame/player/face/Face1.tres") setget setFace
+export var body = preload("res://resources/spriteFrame/player/body/Body1.tres") setget setBody
+export var bag = preload("res://resources/spriteFrame/player/Empty.tres") setget setBag
+export var sword = preload("res://resources/spriteFrame/player/Empty.tres") setget setSword
 
 var gameBundle
 

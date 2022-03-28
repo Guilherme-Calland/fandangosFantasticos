@@ -1,10 +1,11 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://graphics/terrain/sprite_sheet.png" type="Texture" id=1]
 [ext_resource path="res://scenes/players/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://resources/spriteFrame/bag/Bag1.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://resources/spriteFrame/player/bag/Bag1.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://scripts/levels/testLevel/TestLevel.gd" type="Script" id=4]
-[ext_resource path="res://resources/spriteFrame/sword/Sword1.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://resources/spriteFrame/player/sword/Sword1.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://scenes/enemies/TreeMonster.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 18, 0, 18, 18, 0, 18 )
@@ -494,6 +495,9 @@ points = PoolVector2Array( 8.92215, 0.173943, 17.805, 0.308533, 17.9395, 17.9396
 [node name="TestLevel" type="Node2D"]
 script = ExtResource( 4 )
 airResistance = 0.01
+
+[node name="TreeMonster" parent="." instance=ExtResource( 6 )]
+position = Vector2( 311, 606 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )

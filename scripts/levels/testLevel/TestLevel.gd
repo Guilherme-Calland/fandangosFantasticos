@@ -9,6 +9,7 @@ var worldBundle
 func _process(delta):
 	packWorldBundle()
 	$Player1.run(worldBundle)
+	$TreeMonster.run()
 
 func packWorldBundle():
 	worldBundle = {
@@ -16,3 +17,4 @@ func packWorldBundle():
 	'friction' : friction,
 	'airResistance' : airResistance
 	}
+
