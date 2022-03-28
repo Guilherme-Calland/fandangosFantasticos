@@ -5,6 +5,7 @@ const leftButton = 14
 const rightButton = 15
 const jumpButton1 = 0
 const jumpButton2 = 3
+const jumpButton3 = 2
 const secondaryAction1 = 4
 const secondaryAction2 = 6
 
@@ -48,6 +49,8 @@ func jumpIsPressed(playerIndex):
 	if Input.is_joy_button_pressed(playerIndex, jumpButton1):
 		return true
 	if Input.is_joy_button_pressed(playerIndex, jumpButton2):
+		return true
+	if Input.is_joy_button_pressed(playerIndex, jumpButton3):
 		return true
 
 func secondaryActionIsPressed(playerIndex):

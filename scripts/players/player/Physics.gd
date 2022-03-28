@@ -27,20 +27,21 @@ var impulseLock
 
 #localFlags
 var jumpLock = false
+var wallJumpLock = false
 
 func run(gameBundle):
 	if gameBundle['inputs'] == null:
 		return
 	unpackBundle(gameBundle)
 	
-	$Timer.wait_time = jumpForce/400
+	$JumpTimer.wait_time = jumpForce/400
 	
 	if isOnFloor:
 		if jumpLock:
-			if $Timer.is_stopped():
-				$Timer.start()
+			if $JumpTimer.is_stopped():
+				$JumpTimer.start()
 		else: 
-			$Timer.stop()
+			$JumpTimer.stop()
 		
 		if abs(motion.x) < 1:
 			emit_signal("impulseLock", false)
@@ -85,12 +86,20 @@ func run(gameBundle):
 		motion.y += gravity
 	
 	if isOnWall:
+#		if jumpLock:
+#			if $JumpTimer.is_stopped():
+#				$JumpTimer.start()
+#			else: 
+#				$JumpTimer.stop()
+
 		if motion.x > 0:
 			motion.x = 1
 		elif motion.x < 0:
 			motion.x = -1
 		
+#		if jumpPressed and not jumpLock:
 		if jumpPressed:
+#			jumpLock = true
 			var p = 0.65
 			var a = p*p + 1
 			var axisForce = jumpForce*sqrt(a)/ a
@@ -132,5 +141,5 @@ func unpackBundle(gameBundle):
 	isOnCeiling = flags['isOnCeiling']
 	impulseLock = flags['impulseLock']
 
-func _on_Timer_timeout():
+func _on_JumpTimer_timeout():
 	jumpLock = false

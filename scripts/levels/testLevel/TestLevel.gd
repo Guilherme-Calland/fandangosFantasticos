@@ -9,7 +9,6 @@ var worldBundle
 func _process(delta):
 	packWorldBundle()
 	$Player1.run(worldBundle)
-	$Player2.run(worldBundle)
 
 func packWorldBundle():
 	worldBundle = {

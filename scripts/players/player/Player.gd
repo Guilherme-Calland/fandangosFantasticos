@@ -83,3 +83,4 @@ func setSword(newSword):
 
 func impulseLock(val):
 	gameBundle['flags']['impulseLock'] = val
+

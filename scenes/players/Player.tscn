@@ -43,9 +43,9 @@ script = ExtResource( 6 )
 [node name="Physics" type="Node" parent="."]
 script = ExtResource( 2 )
 
-[node name="Timer" type="Timer" parent="Physics"]
+[node name="JumpTimer" type="Timer" parent="Physics"]
 
 [node name="Animation" type="Node" parent="."]
 script = ExtResource( 3 )
 
-[connection signal="timeout" from="Physics/Timer" to="Physics" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Physics/JumpTimer" to="Physics" method="_on_JumpTimer_timeout"]
