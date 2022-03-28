@@ -86,20 +86,20 @@ func run(gameBundle):
 		motion.y += gravity
 	
 	if isOnWall:
-#		if jumpLock:
-#			if $JumpTimer.is_stopped():
-#				$JumpTimer.start()
-#			else: 
-#				$JumpTimer.stop()
-
+		if jumpLock:
+			motion.y = 0
+			if $JumpTimer.is_stopped():
+				$JumpTimer.start()
+		else: 
+			$JumpTimer.stop()
+		
 		if motion.x > 0:
 			motion.x = 1
 		elif motion.x < 0:
 			motion.x = -1
 		
-#		if jumpPressed and not jumpLock:
-		if jumpPressed:
-#			jumpLock = true
+		if jumpPressed and not jumpLock:
+			jumpLock = true
 			var p = 0.65
 			var a = p*p + 1
 			var axisForce = jumpForce*sqrt(a)/ a
