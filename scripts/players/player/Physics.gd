@@ -2,6 +2,7 @@ extends Node
 
 #signals
 signal impulseLock
+signal facingLeft
 
 #inputs
 var leftPressed
@@ -23,9 +24,10 @@ var XYProportion
 var isOnFloor
 var isOnWall
 var isOnCeiling
-var impulseLock
+var facingLeft
 
 #localFlags
+var impulseLock = false
 var jumpLock = false
 var wallJumpLock = false
 
@@ -44,13 +46,15 @@ func run(gameBundle):
 			$JumpTimer.stop()
 		
 		if abs(motion.x) < 1:
-			emit_signal("impulseLock", false)
+			impulseLock = false
 		
 		motion.y = gravity
 		
 		if leftPressed and not secondaryActionPressed and not impulseLock and not jumpLock:
+			emit_signal("facingLeft", true)
 			motion.x = clamp(motion.x - aceleration, -maxSpeed, 0)
 		elif rightPressed and not secondaryActionPressed and not impulseLock and not jumpLock:
+			emit_signal("facingLeft", false)
 			motion.x = clamp(motion.x + aceleration, 0, maxSpeed)
 		else:
 			motion.x = lerp(motion.x, 0, friction)
@@ -62,7 +66,7 @@ func run(gameBundle):
 			var a = p*p + 1
 			var axisForce = jumpForce*sqrt(a)/ a
 			if secondaryActionPressed:
-				emit_signal("impulseLock", true)
+				impulseLock = true
 				if leftPressed:
 					motion.x -= p*axisForce
 					motion.y = -axisForce
@@ -73,9 +77,11 @@ func run(gameBundle):
 					motion.y = -jumpForce
 			if not secondaryActionPressed:
 				if leftPressed:
+					emit_signal("facingLeft", true)
 					motion.x -= axisForce
 					motion.y  = -p*axisForce
 				elif rightPressed:
+					emit_signal("facingLeft", false)
 					motion.x += axisForce
 					motion.y  = -p*axisForce
 				else:
@@ -99,6 +105,7 @@ func run(gameBundle):
 			motion.x = -1
 		
 		if jumpPressed and not jumpLock:
+			emit_signal("facingLeft", !facingLeft)
 			jumpLock = true
 			var p = 0.65
 			var a = p*p + 1
@@ -139,7 +146,7 @@ func unpackBundle(gameBundle):
 	isOnFloor = flags['isOnFloor']
 	isOnWall = flags['isOnWall']
 	isOnCeiling = flags['isOnCeiling']
-	impulseLock = flags['impulseLock']
+	facingLeft = flags['facingLeft']
 
 func _on_JumpTimer_timeout():
 	jumpLock = false

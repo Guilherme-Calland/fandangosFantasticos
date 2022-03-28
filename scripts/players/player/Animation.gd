@@ -3,7 +3,6 @@ extends Node
 #inputs
 var leftPressed
 var rightPressed
-var jumpPressed
 var secondaryActionPressed
 
 #physics
@@ -13,7 +12,7 @@ var maxSpeed
 #flags
 var isOnFloor
 var isOnWall
-var impulseLock
+var facingLeft
 
 #animation
 var face
@@ -25,26 +24,24 @@ func run(gameBundle):
 	if gameBundle['inputs'] == null:
 		return
 	unpackBundle(gameBundle)
-		
+	
+	if facingLeft:
+		flipSpriteHorizontal(true)
+	elif not facingLeft:
+		flipSpriteHorizontal(false)
+	
 	if isOnFloor and not isOnWall:
-		if leftPressed and not secondaryActionPressed and not impulseLock:
+		if (leftPressed or rightPressed) and abs(motion.x) > 1 and not secondaryActionPressed:
 			setFrameSpeed(abs(motion.x/maxSpeed))
-			flipSpriteHorizontal(true)
-			playAnimation("run")
-		elif rightPressed and not secondaryActionPressed and not impulseLock:
-			setFrameSpeed(abs(motion.x/maxSpeed))
-			flipSpriteHorizontal(false)
 			playAnimation("run")
 		else:
-			playAnimation("idle")
 			setFrameSpeed(1)
+			playAnimation("idle")
 	elif not isOnFloor:
 		playAnimation("jump")
 	
 	if isOnWall:
 		playAnimation("touch")
-		if jumpPressed:
-			flipSpriteHorizontal(!body.flip_h)
 	
 func unpackBundle(gameBundle):
 	var inputs = gameBundle['inputs']
@@ -55,7 +52,6 @@ func unpackBundle(gameBundle):
 	#inputs
 	leftPressed = inputs['leftPressed']
 	rightPressed = inputs['rightPressed']
-	jumpPressed = inputs['jumpPressed']
 	secondaryActionPressed = inputs['secondaryActionPressed']
 	
 	#physics
@@ -65,7 +61,7 @@ func unpackBundle(gameBundle):
 	#flags
 	isOnFloor = flags['isOnFloor']
 	isOnWall = flags['isOnWall']
-	impulseLock = flags['impulseLock']
+	facingLeft = flags['facingLeft']
 
 	#animation
 	face = animation['face']

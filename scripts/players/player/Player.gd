@@ -20,7 +20,7 @@ var airResistance
 func _ready():
 	initBundle()
 	setAllSprites()
-	$Physics.connect("impulseLock", self, "impulseLock")
+	$Physics.connect("facingLeft", self, "updateFacingLeft")
 
 func run(worldBundle):
 	unpackWorldBundle(worldBundle)
@@ -34,7 +34,7 @@ func initBundle():
 	gameBundle = {
 		'inputs' : $Input.inputs,
 		'physics' : {'motion': Vector2(0,0), 'speed': 0, 'jumpForce': 0, 'gravity': 0, 'friction': 0, 'airResistance': 0, 'XYProportion': XYProportion},
-		'flags' : {'isOnFloor': false, 'isOnWall': false, 'isOnCeiling': false, 'impulseLock': false},
+		'flags' : {'isOnFloor': false, 'isOnWall': false, 'isOnCeiling': false, 'facingLeft' : false},
 		'animation' : {'face': $Sprites/Face, 'body' : $Sprites/Body, 'bag' : $Sprites/Bag, 'sword': $Sprites/Sword}
 	}
 
@@ -81,6 +81,5 @@ func setSword(newSword):
 	sword = newSword
 	setAllSprites()
 
-func impulseLock(val):
-	gameBundle['flags']['impulseLock'] = val
-
+func updateFacingLeft(val):
+	gameBundle['flags']['facingLeft'] = val
