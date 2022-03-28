@@ -9,7 +9,6 @@ var worldBundle
 func _process(delta):
 	packWorldBundle()
 	$Player1.run(worldBundle)
-	$TreeMonster.run()
 
 func packWorldBundle():
 	worldBundle = {
@@ -18,3 +17,5 @@ func packWorldBundle():
 	'airResistance' : airResistance
 	}
 
+func _on_MoveCameraArea_body_entered(body, position):
+	$Camera2D.global_position = position
