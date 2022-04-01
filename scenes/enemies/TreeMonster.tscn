@@ -1,20 +1,23 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://graphics/enemies/treeMonster/getting_ready/getting_ready1.png" type="Texture" id=1]
+[ext_resource path="res://graphics/enemies/treeMonster/areaAttack/2.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enemies/TreeMonster.gd" type="Script" id=2]
-[ext_resource path="res://graphics/enemies/treeMonster/getting_ready/getting_ready4.png" type="Texture" id=3]
-[ext_resource path="res://graphics/enemies/treeMonster/getting_ready/getting_ready3.png" type="Texture" id=4]
-[ext_resource path="res://graphics/enemies/treeMonster/getting_ready/getting_ready6.png" type="Texture" id=5]
-[ext_resource path="res://graphics/enemies/treeMonster/getting_ready/getting_ready2.png" type="Texture" id=6]
-[ext_resource path="res://graphics/enemies/treeMonster/getting_ready/getting_ready5.png" type="Texture" id=7]
-[ext_resource path="res://graphics/enemies/treeMonster/getting_ready/getting_ready7.png" type="Texture" id=8]
+[ext_resource path="res://graphics/enemies/treeMonster/areaAttack/3.png" type="Texture" id=3]
+[ext_resource path="res://graphics/enemies/treeMonster/idle/1.png" type="Texture" id=4]
+[ext_resource path="res://graphics/enemies/treeMonster/areaAttack/4.png" type="Texture" id=5]
+[ext_resource path="res://graphics/enemies/treeMonster/wakingUp/6.png" type="Texture" id=6]
+[ext_resource path="res://graphics/enemies/treeMonster/wakingUp/3.png" type="Texture" id=7]
+[ext_resource path="res://graphics/enemies/treeMonster/wakingUp/8.png" type="Texture" id=8]
+[ext_resource path="res://graphics/enemies/treeMonster/wakingUp/2.png" type="Texture" id=9]
 [ext_resource path="res://resources/animations/enemies/treeMonster/idle.tres" type="Animation" id=10]
 [ext_resource path="res://resources/animations/enemies/treeMonster/backToIdle.tres" type="Animation" id=11]
-[ext_resource path="res://graphics/enemies/treeMonster/areaAttack/getting_ready_to_attack/1.png" type="Texture" id=12]
-[ext_resource path="res://graphics/enemies/treeMonster/getting_ready/getting_ready8.png" type="Texture" id=13]
-[ext_resource path="res://graphics/enemies/treeMonster/areaAttack/ready/1.png" type="Texture" id=14]
-[ext_resource path="res://graphics/enemies/treeMonster/areaAttack/atacking/mid.png" type="Texture" id=15]
-[ext_resource path="res://graphics/enemies/treeMonster/areaAttack/atacking/end.png" type="Texture" id=16]
+[ext_resource path="res://graphics/enemies/treeMonster/idle/2.png" type="Texture" id=12]
+[ext_resource path="res://graphics/enemies/treeMonster/wakingUp/7.png" type="Texture" id=13]
+[ext_resource path="res://graphics/enemies/treeMonster/wakingUp/4.png" type="Texture" id=14]
+[ext_resource path="res://graphics/enemies/treeMonster/wakingUp/1.png" type="Texture" id=15]
+[ext_resource path="res://graphics/enemies/treeMonster/wakingUp/5.png" type="Texture" id=16]
+[ext_resource path="res://graphics/enemies/treeMonster/idle/3.png" type="Texture" id=17]
+[ext_resource path="res://graphics/enemies/treeMonster/areaAttack/1.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 17.5 )
@@ -31,7 +34,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 1 ) ]
+"values": [ null ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -45,14 +48,31 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.282609, 0.717391, 0.76087 ),
+"times": PoolRealArray( 0, 0.217391, 0.304347, 0.695651, 0.782608 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 18 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+loop = true
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ]
+"values": [ ExtResource( 4 ), ExtResource( 12 ), ExtResource( 17 ), ExtResource( 12 ) ]
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "gettingReady"
+resource_name = "wakingUp"
 length = 1.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -64,7 +84,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 13 ) ]
+"values": [ ExtResource( 15 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 14 ), ExtResource( 16 ), ExtResource( 6 ), ExtResource( 13 ), ExtResource( 8 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -73,33 +93,16 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1.9 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "playReady2"
-} ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "ready"
-length = 0.1
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 13 ) ]
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
 }
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 7.02429, 12.3053 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 70, 40 )
 
 [node name="TreeMonster" type="StaticBody2D"]
 collision_layer = 4
@@ -111,24 +114,33 @@ position = Vector2( 5.5, 7.5 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/areaAttack = SubResource( 6 )
-anims/backToIdle = ExtResource( 11 )
-anims/gettingReady = SubResource( 3 )
-anims/idle = ExtResource( 10 )
-anims/ready = SubResource( 4 )
+anims/backToSleep = ExtResource( 11 )
+anims/idle = SubResource( 4 )
+anims/sleeping = ExtResource( 10 )
+anims/wakingUp = SubResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="AttackArea" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2( -41.095, -0.733506 )
 rotation = -3.14159
 scale = Vector2( 5.68099, 2.0533 )
 shape = SubResource( 5 )
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[node name="SightArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SightArea"]
+position = Vector2( -71, -17 )
+shape = SubResource( 7 )
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_AttackArea_body_exited"]
+[connection signal="body_entered" from="SightArea" to="." method="_on_SightArea_body_entered"]
+[connection signal="body_exited" from="SightArea" to="." method="_on_SightArea_body_exited"]
