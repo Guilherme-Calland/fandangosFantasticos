@@ -52,10 +52,10 @@ func run(gameBundle):
 		
 		if leftPressed and not secondaryActionPressed and not impulseLock and not jumpLock:
 			emit_signal("facingLeft", true)
-			motion.x = clamp(motion.x - aceleration, -maxSpeed, 0)
+			motion.x = clamp(motion.x - aceleration, -maxSpeed, (maxSpeed + jumpForce))
 		elif rightPressed and not secondaryActionPressed and not impulseLock and not jumpLock:
 			emit_signal("facingLeft", false)
-			motion.x = clamp(motion.x + aceleration, 0, maxSpeed)
+			motion.x = clamp(motion.x + aceleration, -(maxSpeed + jumpForce), maxSpeed)
 		else:
 			motion.x = lerp(motion.x, 0, friction)
 			

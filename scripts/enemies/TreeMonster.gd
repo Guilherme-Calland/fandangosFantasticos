@@ -34,3 +34,18 @@ func attack():
 			$AnimationPlayer.play(attackType)
 		else:
 			$AnimationPlayer.queue(attackType)
+
+func _on_HazardArea_body_entered(body):
+	print('ouch')
+
+func enableAreaAttackCollision():
+	$HazardArea/AreaAttackCollision.set_deferred("disabled", false)
+
+func disableAreaAttackCollision():
+	$HazardArea/AreaAttackCollision.set_deferred("disabled", true)
+	
+func enableStingAttackCollision():
+	$HazardArea/StingAreaCollision.set_deferred("disabled", false)
+
+func disableStingAttackCollision():
+	$HazardArea/StingAreaCollision.set_deferred("disabled", true)
