@@ -9,11 +9,16 @@ animations = [ {
 }, {
 "frames": [  ],
 "loop": true,
+"name": "run",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
 "name": "jump",
 "speed": 5.0
 }, {
 "frames": [  ],
 "loop": true,
-"name": "run",
+"name": "touch",
 "speed": 5.0
 } ]

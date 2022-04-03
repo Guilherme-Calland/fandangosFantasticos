@@ -8,8 +8,8 @@ export var XYProportion = 3.0
 
 export var face = preload("res://resources/spriteFrame/player/face/Face1.tres") setget setFace
 export var body = preload("res://resources/spriteFrame/player/body/Body1.tres") setget setBody
-export var bag = preload("res://resources/spriteFrame/player/Empty.tres") setget setBag
-export var sword = preload("res://resources/spriteFrame/player/Empty.tres") setget setSword
+export var bag = preload("res://resources/spriteFrame/player/bag/Bag1.tres") setget setBag
+export var sword = preload("res://resources/spriteFrame/player/sword/Sword1.tres") setget setSword
 
 var gameBundle
 
@@ -60,11 +60,11 @@ func unpackWorldBundle(worldBundle):
 	airResistance = worldBundle['airResistance']
 
 func setAllSprites():
-	$Sprites/Face.set_sprite_frames(face)
-	$Sprites/Body.set_sprite_frames(body)
-	$Sprites/Bag.set_sprite_frames(bag)
-	$Sprites/Sword.set_sprite_frames(sword)
-
+		$Sprites/Face.set_sprite_frames(face)
+		$Sprites/Body.set_sprite_frames(body)
+		$Sprites/Bag.set_sprite_frames(bag)
+		$Sprites/Sword.set_sprite_frames(sword)
+	
 func setFace(newFace):
 	face = newFace
 	setAllSprites()

@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/enemies/TreeMonster.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/players/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/levels/testLevel/TestLevel2.gd" type="Script" id=4]
-[ext_resource path="res://resources/spriteFrame/player/bag/Bag1.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://resources/spriteFrame/player/Empty.tres" type="SpriteFrames" id=5]
 
 [node name="TestLevel2" type="Node2D"]
 script = ExtResource( 4 )
@@ -22,6 +22,7 @@ maxSpeed = 75.0
 jumpForce = 200.0
 XYProportion = 4.0
 bag = ExtResource( 5 )
+sword = ExtResource( 5 )
 
 [node name="TreeMonster" parent="." instance=ExtResource( 2 )]
 position = Vector2( 313, 66 )
